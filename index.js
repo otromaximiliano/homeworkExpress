@@ -72,6 +72,23 @@ server.put('/empleados', (req, res) => {
   }
 });
 
+server.delete('/empleados/:id', (req, res) => {
+  let id = req.params.id;
+  if(id){
+    let empleadoFiltrado = empleados.find(empleado => empleado.id === id);
+    if(empleadoFiltrado){
+      let resultado = empleados.filter(empleado => empleado.id !== empleadoFiltrado.id);
+      empleados = resultado;
+      res.status(STATUSES.OK).json({success: true})
+    }else{
+      res.status().json({error: "No determino su id"})
+    }
+  }else{
+    res.status(STATUSES.BAD_REQUEST).json({error: ""})
+  }
+
+});
+
 
 server.listen(PORT, ()=>{
   console.log(`http://localhost:${PORT}`)
