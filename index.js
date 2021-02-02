@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const PORT = 3000;
+let INICIO = 1;
 const STATUSES = {
   SERVER_ERROR : 500,
   NOT_FOUND: 404,
@@ -16,7 +17,7 @@ function nuestroPropioLoguer(req, res, next){
   next();
 }
 
-server.use(bodyParser)
+server.use(bodyParser.json())
 server.use("/",nuestroPropioLoguer);
 
 server.get("/empleados", (req, res)=>{
@@ -36,6 +37,40 @@ server.get("/empleados", (req, res)=>{
     res.status(STATUSES.SERVER_ERROR).json()
   }
 })
+
+server.post('/empleados', (req, res) => {
+  let { name, surname, dni, salary } = req.body;
+  if(name && surname && dni && salary){
+    
+    empleados.push({
+      name,
+      surname,
+      dni,
+      salary,
+      id: INICIO++
+    })
+    res.status(STATUSES.OK).json(empleados[empleados.length-1])
+
+  }else{
+    res.status(STATUSES.BAD_REQUEST).json({loco: "Manda bien chamigo!" })
+  }
+});
+
+server.put('/empleados', (req, res) => {
+  let {name, surname, dni, salary, id }= req.body
+  if(id){
+    let empleadoEncontrado = empleados.findIndex(empleado => empleado.id === id)
+    if(empleadoEncontrado >= 0){
+      empleados[empleadoEncontrado].name = name
+      empleados[empleadoEncontrado].surname = surname
+      empleados[empleadoEncontrado].dni = dni
+      empleados[empleadoEncontrado].salary = salary
+      res.status(STATUSES.OK).json(empleados[empleadoEncontrado])
+    }
+  }else{
+    res.status(STATUSES.BAD_REQUEST).json({boludo: "Manda un id valido!"})
+  }
+});
 
 
 server.listen(PORT, ()=>{
