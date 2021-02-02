@@ -77,8 +77,8 @@ server.delete('/empleados/:id', (req, res) => {
   if(id){
     let empleadoFiltrado = empleados.find(empleado => empleado.id === id);
     if(empleadoFiltrado){
-      let resultado = empleados.filter(empleado => empleado.id !== empleadoFiltrado.id);
-      empleados = resultado;
+      // Esto es pro!
+      empleados = empleados.filter(empleado => empleado.id !== empleadoFiltrado.id);
       res.status(STATUSES.OK).json({success: true})
     }else{
       res.status().json({error: "No determino su id"})
