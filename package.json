@@ -1,0 +1,24 @@
+{
+  "name": "homeworkexpress",
+  "version": "1.0.0",
+  "description": "Ejemplo de Objeto empleado\r ```js \r {\r name: \"Fulano\",\r surname: \"De tAL\",\r dni: 34526273,\r salary: 234.890\r }\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otromaximiliano/homeworkExpress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otromaximiliano/homeworkExpress/issues"
+  },
+  "homepage": "https://github.com/otromaximiliano/homeworkExpress#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
